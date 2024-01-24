@@ -9,18 +9,17 @@ import { WebserviceService } from './webservice.service';
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
-
 })
-export class AppComponent {
-  title = 'IsisCapitalistLofi';
 
+export class AppComponent {
   world: World = new World();
+  server = 'https://isiscapitalistgraphql.kk.kurasawa.fr/'
   constructor(private service: WebserviceService) {
-    service.getWorld().then(
+    this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
       });
   }
-
 }
+
 
