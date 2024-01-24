@@ -1,8 +1,7 @@
 module.exports = {
     "name": "Lofi Capitalist",
-    "logo": "icones/logomonde.jpg",
-    // trouver un logo pour notre monde
-    "money": 0,
+    "logo": "icones/logo.png",
+    "money": 4,
     "score": 0,
     "totalangels": 0,
     "activeangels": 0,
@@ -12,7 +11,6 @@ module.exports = {
         {
             "id": 1,
             "name": "Cactus",
-            // nom plantes + ordre
             "logo": "icones/Item/item1.jpg",
             "cout": 4,
             "croissance": 1.07,
@@ -23,7 +21,7 @@ module.exports = {
             "managerUnlocked": false,
             "palliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Palier1_Cactus",
                     // Trouver les noms de paliers
                     "logo": "icones/Item/item1.jpg",
                     "seuil": 25,
@@ -33,7 +31,7 @@ module.exports = {
                     "unlocked": "false"
                 },
                 {
-                    "name": "Palier2",
+                    "name": "Palier2_Cactus",
                     "logo": "icones/Item/item1.jpg",
                     "seuil": 75,
                     "idcible": 1,
@@ -56,7 +54,7 @@ module.exports = {
             "managerUnlocked": false,
             "palliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Palier1_Cactus_fleuri",
                     "logo": "icones/Item/item2.jpg",
                     "seuil": 25,
                     "idcible": 1,
@@ -65,7 +63,7 @@ module.exports = {
                     "unlocked": "false"
                 },
                 {
-                    "name": "Palier2",
+                    "name": "Palier2_Cactus_fleuri",
                     "logo": "icones/Item/item2.jpg",
                     "seuil": 75,
                     "idcible": 1,

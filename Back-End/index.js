@@ -7,7 +7,7 @@ let world = require("./world")
 const typeDefs = require("./schema.js");
 
 // Provide resolver functions for your schema fields
-const resolvers = require("./resolvers")
+const resolvers = require("./resolvers");
 
 const server = new ApolloServer({
     typeDefs,resolvers,
