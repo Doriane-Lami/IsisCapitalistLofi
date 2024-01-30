@@ -1,1 +1,8 @@
-<p>product works!</p>
+<div class="produit">
+    <div id="logoQte">
+        <img id="logoProduit" [attr.src]="server+product.logo" />
+        <div id="qte">{{product.quantite}}</div>
+    </div>
+    {{product.name}}
+    {{product.cout}}
+</div>

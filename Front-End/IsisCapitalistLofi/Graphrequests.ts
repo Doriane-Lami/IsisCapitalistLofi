@@ -1,4 +1,6 @@
-import {gql} from "@urql/core";
+import { gql } from "@urql/core";
+
+export const BACKEND = "https://isiscapitalistgraphql.kk.kurasawa.fr"
 
 export const GET_WORLD = gql`
 query getWorld {
@@ -67,8 +69,7 @@ query getWorld {
         ratio
         typeratio
         unlocked
-      }
-      
+      } 
     }
   }
   `

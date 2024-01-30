@@ -1,0 +1,21 @@
+#logoQte{
+    position: relative;
+    place-self: center;
+}
+
+#logoProduit {
+    position: absolute;
+    z-index: -1;
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    place-self: center;
+}
+
+#qte{
+    place-self: center;
+    border-style:solid;
+    border: 5px;
+}
+
