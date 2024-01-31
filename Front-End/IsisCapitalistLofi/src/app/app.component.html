@@ -1,20 +1,21 @@
-<div class="tout"> <img id="back" [attr.src]="server+world.logo" />
+<div class="tout"> 
+  <img id="back" [attr.src]="server+world.logo" />
   <div class="header">
     <span id="worldname"> {{world.name}} </span>
-    <div> argent </div>
+    <div> {{world.money}} </div>
     <div> multiplicateur </div>
     <div> ID du joueur </div>
   </div>
 
   <div class="main">
-    <div class="button_menu">
+    <div class="gauche">
       <img id="logomonde" [attr.src]="server+world.logo" />
-      <button mat-button>Career</button>
-      <button mat-raised-button>Unlocks</button>
-      <button mat-raised-button>Upgrades</button>
-      <button mat-raised-button>Managers</button>
-      <button mat-raised-button>Inverstors</button>
-      <button mat-raised-button color="primary">Primary</button>
+      <button class="bouton" >Career</button>
+      <button class="bouton" >Unlocks</button>
+      <button class="bouton" mat-raised-button>Upgrades</button>
+      <button class="bouton" mat-raised-button>Managers</button>
+      <button class="bouton" mat-raised-button>Inverstors</button>
+      <button class="bouton" mat-raised-button color="primary">Primary</button>
     </div>
 
     <div class="product">
@@ -22,6 +23,6 @@
       <app-product [money]="world.money" [product]="product"></app-product>
       }
     </div>
-    
+
   </div>
 </div>

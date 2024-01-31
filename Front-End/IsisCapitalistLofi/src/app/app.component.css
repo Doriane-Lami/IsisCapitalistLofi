@@ -1,31 +1,8 @@
-.header {
-    display: grid;
-    grid-template-columns: 25% 25% 30% 20%;
-    height: 50px;
-}
-
-.main {
-    display: grid;
-    grid-template-columns: 20% 80%;
-}
-
-.product {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: minmax(100px, auto);
-    text-align: center;
-}
-
-
 .tout {
     background-repeat: no-repeat;
-}
-
-#logomonde {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    place-self: center;
+    height: 100%;
+    width: 100%;
+    font-family: arial;
 }
 
 #back {
@@ -33,21 +10,69 @@
     height: 100%;
     position: absolute;
     z-index: -10;
+    opacity: 0.7;
 }
 
-.button_menu {
+.header {
     display: grid;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    grid-template-columns: 25% 25% 25% 25%;
+    height: 8%;
+    background-color: aqua;
+}
+
+/* On met height à 92% car c'est 100% (tout) - 8% (header)*/
+.main {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    justify-content: space-between;
+    height: 92%;
+}
+
+#logomonde {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.gauche {
     grid-template-columns: 1fr;
-    height: 100%;
-    gap: 30px;
     place-self: center;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    background-color: cadetblue;
+    justify-items: center;
 }
 
-.button {
-  transition-duration: 0.4s;
+.bouton {
+    transition-duration: 0.3s;
+    padding: 10px;
+    font-size: 1em;
+    color: #663300;
+    background-color: #fbd5b5;
+    border-radius: 24px;
+    border: none;
+    width: 75%;
 }
 
-.button:hover {
-  background-color: #04AA6D; /* Green */
-  color: white;
+.bouton:hover {
+    padding: 10px;
+    color: #632423;
+    box-shadow: 1px 1px 4px #632423;
+}
+
+.product {
+    padding-top: 3%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    height: 80%;
 }

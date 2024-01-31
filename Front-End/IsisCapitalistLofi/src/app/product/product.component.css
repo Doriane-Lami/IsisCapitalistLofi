@@ -1,20 +1,29 @@
-#logoQte{
-    position: relative;
-    place-self: center;
+.produit{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    background-color: beige;
+}
+
+
+.gauche{
+    text-align:right;
+}
+
+
+.droite{
+    text-align:left;
+    background-color: coral;
 }
 
 #logoProduit {
     position: absolute;
     z-index: -1;
-
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    place-self: center;
 }
 
 #qte{
-    place-self: center;
     border-style:solid;
     border: 5px;
 }
