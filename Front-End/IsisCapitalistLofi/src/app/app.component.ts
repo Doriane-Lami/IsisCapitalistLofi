@@ -4,12 +4,16 @@ import { World, Palier, Product } from '../../world';
 import { WebserviceService } from './webservice.service';
 import { BACKEND } from "../../Graphrequests"
 import { ProductComponent } from './product/product.component';
+import { BigvaluePipe } from './bigvalue.pipe';
+import { isNumberObject } from 'node:util/types';
+import { resetFakeAsyncZone } from '@angular/core/testing';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -23,6 +27,13 @@ export class AppComponent {
         this.world = world.data.getWorld;
       });
   }
+
+  onProductionDone(p: Product){
+    this.world.score += p.revenu
+    this.world.money += p.revenu
+  }
+
+
 }
 
 

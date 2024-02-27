@@ -1,27 +1,35 @@
-<div class="tout"> 
+<div class="tout">
   <img id="back" [attr.src]="server+world.logo" />
-  <div class="header">
-    <span id="worldname"> {{world.name}} </span>
-    <div> {{world.money}} </div>
-    <div> multiplicateur </div>
-    <div> ID du joueur </div>
-  </div>
 
   <div class="main">
+
     <div class="gauche">
-      <img id="logomonde" [attr.src]="server+world.logo" />
-      <button class="bouton" >Career</button>
-      <button class="bouton" >Unlocks</button>
-      <button class="bouton" mat-raised-button>Upgrades</button>
-      <button class="bouton" mat-raised-button>Managers</button>
-      <button class="bouton" mat-raised-button>Inverstors</button>
-      <button class="bouton" mat-raised-button color="primary">Primary</button>
+      <div id="monde">
+        <img id="logomonde" [attr.src]="server+world.logo" />
+        <span id="worldname"> {{world.name}} </span>
+      </div>
+      <div id="lesBouttons">
+        <button class="bouton">Career</button>
+        <button class="bouton">Unlocks</button>
+        <button class="bouton" mat-raised-button>Upgrades</button>
+        <button class="bouton" mat-raised-button>Managers</button>
+        <button class="bouton" mat-raised-button>Inverstors</button>
+        <button class="bouton" mat-raised-button color="primary">Primary</button>
+      </div>
     </div>
 
-    <div class="product">
-      @for (product of world.products; track product.id){
-      <app-product [money]="world.money" [product]="product"></app-product>
-      }
+    <div class="droite">
+      <div class="header">
+        <span [innerHTML]="world.money | bigvalue"> </span>
+        <div> multiplicateur </div>
+        <div> ID du joueur </div>
+      </div>
+      <div class="product">
+        @for (product of world.products; track product.id){
+        <app-product [money]="world.money" [product]="product" (notifyProduction)="onProductionDone($event)"
+        ></app-product>
+        }
+      </div>
     </div>
 
   </div>

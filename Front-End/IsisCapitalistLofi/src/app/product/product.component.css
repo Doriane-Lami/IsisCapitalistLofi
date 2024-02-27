@@ -28,3 +28,7 @@
     border: 5px;
 }
 
+.progressbar{
+    height: 25px;
+    background-color: aquamarine;
+}

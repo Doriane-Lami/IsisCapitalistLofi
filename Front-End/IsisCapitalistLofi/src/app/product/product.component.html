@@ -1,7 +1,10 @@
 <div class="produit">
     <div class="gauche">
-        <img id="logoProduit" [attr.src]="server+product.logo"/>
+        <img id="logoProduit" [attr.src]="server+product.logo" />
         <div id="qte">{{product.quantite}}</div>
     </div>
-    <div class="droite">{{product.name}}, {{product.cout}}</div>
+    
+    <div class="droite" (click)="startFabrication()">{{product.name}}, {{product.cout}} 
+        <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+    </div>
 </div>

@@ -19,28 +19,22 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 33% 33% 33%;
     height: 8%;
     background-color: aqua;
 }
 
-/* On met height à 92% car c'est 100% (tout) - 8% (header)*/
 .main {
     display: grid;
     grid-template-columns: 20% 80%;
     justify-content: space-between;
-    height: 92%;
-}
-
-#logomonde {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    height: 100%;
 }
 
 .gauche {
     grid-template-columns: 1fr;
-    place-self: center;
+    grid-template-rows: 25% 75%;
+    place-self: top;
     width: 100%;
     height: 100%;
     display: grid;
@@ -50,9 +44,28 @@
     justify-items: center;
 }
 
+#logomonde {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+#monde{
+    display: grid;
+    grid-template-columns: 1f;
+}
+
+#lesBouttons{
+    height: 80%;
+    align-items: center;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+}
+
 .bouton {
     transition-duration: 0.3s;
-    padding: 10px;
+    padding: 12px;
     font-size: 1em;
     color: #663300;
     background-color: #fbd5b5;
@@ -62,7 +75,7 @@
 }
 
 .bouton:hover {
-    padding: 10px;
+    padding: 12px;
     color: #632423;
     box-shadow: 1px 1px 4px #632423;
 }
