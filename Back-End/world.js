@@ -24,11 +24,12 @@ module.exports = {
                     "name": "Palier1_Mammillaria_elongata",
                     // Trouver les noms de paliers
                     "logo": "icones/Item/item1.jpg",
-                    "seuil": 25,
+                    "seuil": 20,
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": "false"
+                    // TODO: Faire en sorte que les palliers ne soient pas null + regarder si c'est "false" ou false
                 },
                 {
                     "name": "Palier2_Mammillaria_elongata",
@@ -156,7 +157,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 },
                 {
                     "name": "Palier2_Crassula",
@@ -165,7 +166,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 },
             ]
         },
@@ -188,7 +189,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 },
                 {
                     "name": "Palier2_Aloe_Aristata",
@@ -197,7 +198,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 },
             ]
         }
@@ -210,7 +211,7 @@ module.exports = {
             "idcible": 0,
             "ratio": 2,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
 ],
 "upgrades": [
@@ -221,7 +222,7 @@ module.exports = {
         "idcible": 1,
         "ratio": 3,
         "typeratio": "gain",
-        "unlocked": "false"
+        "unlocked": false
     },
 ],
     "angelupgrades": [
@@ -232,7 +233,7 @@ module.exports = {
         "idcible": 0,
         "ratio": 3,
         "typeratio": "gain",
-        "unlocked": "false"
+        "unlocked": false
     },
 ],
     "managers": [
@@ -244,7 +245,7 @@ module.exports = {
             "idcible": 1,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Chat_rêveur",
@@ -253,7 +254,7 @@ module.exports = {
             "idcible": 2,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Chat_sous_caféine",
@@ -262,7 +263,7 @@ module.exports = {
             "idcible": 3,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Chat_écrivain",
@@ -271,7 +272,7 @@ module.exports = {
             "idcible": 4,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Chat_informaticien",
@@ -280,7 +281,7 @@ module.exports = {
             "idcible": 5,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Super_Chat",
@@ -289,6 +290,6 @@ module.exports = {
             "idcible": 6,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         }
 ]};
