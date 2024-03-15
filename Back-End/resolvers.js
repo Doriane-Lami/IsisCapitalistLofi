@@ -40,8 +40,12 @@ function getProduitManager(manager, context){
 }
 
 function calcCoutProduit(produit, qt){
-    let somme = (produit.prix*Math.pow(produit.croissance,qt)-1)/(produit.croissance -1 )
-    produit.prix = produit.prix*Math.pow(produit.croissance,qt)
+    // somme prend en compte les objets déjà achetés
+    let somme = Math.round(produit.cout*(Math.pow(produit.croissance,produit.quantite - 1) -1)/(produit.croissance -1 )) - Math.round(produit.cout*(Math.pow(produit.croissance, produit.quantite - 1 - qt) -1)/(produit.croissance -1 ))
+    // TODO : Vérifier avec Doriane qu'on a la même fonction
+    console.log("somme = " + somme)
+    //produit.prix = produit.prix*Math.pow(produit.croissance,qt)
+    //console.log("produit.prix = " + produit.prix)
     return somme
 }
 
@@ -172,7 +176,6 @@ function implementUnlocks(produit, vitesse, gain, context){
 function updateScore(parent, args, context, info){
     let produits = context.world.products
     let tempsecoule = Date.now() - context.world.lastupdate
-    console.log("Temps ecoule : " + tempsecoule)
     for(let i = 0; i<6 ; i = i +1){
         let produit = produits[i]
         
@@ -183,7 +186,7 @@ function updateScore(parent, args, context, info){
        let nb_objet_crees = calcQtProductionforElapseTime(produits[i], tempsecoule)
         let argentGagne = nb_objet_crees*produit.revenu*produit.quantite
         context.world.score = context.world.score + argentGagne
-        context.world.money = context.world.money + score
+        context.world.money = context.world.money + argentGagne
         context.world.lastupdate = Date.now()
     }
 }
@@ -227,10 +230,10 @@ module.exports = {
         }
     },
     Mutation: {
-        // TODO : Faire en sorte que les managers fonctionnent (pas de nouvelles productions quand ils sont engaggés)
 
         acheterQtProduit(parent, args, context, info){
 
+            console.log("Avant le update score, money = " + context.world.money)
             updateScore(parent, args, context, info)
 
             let qt = args.quantite
@@ -238,11 +241,18 @@ module.exports = {
 
             let produit = getProduit(parent, args, context, info)
 
+            console.log("Après getProduit, money = " + context.world.money)
+
             produit.quantite = produit.quantite + qt
+
+            console.log("12, money = " + context.world.money)
+
             context.world.money = context.world.money - calcCoutProduit(produit, qt)
 
-            checkPallier(produit)
-            checkAllUnlocks(parent, args, context, info)
+            console.log("13, money = " + context.world.money)
+
+            //checkPallier(produit)
+            //checkAllUnlocks(parent, args, context, info)
             // TODO : vérifier que les fonctions sont ok
 
             saveWorld(context)
@@ -252,15 +262,13 @@ module.exports = {
             updateScore(parent, args, context, info)
             let produit = getProduit(parent, args, context, info)
 
+
             if(produit.timeleft == null) {
                 throw new Error(`Le produit est encore en production`);
             }
-                console.log("Produit :" + produit)
-                console.log("Timeleft" + produit.timeleft)
-                console.log("Vitesse" + produit.vitesse)
+
                 produit.timeleft = produit.vitesse
 
-                console.log("Score : " + context.world.score)
                 saveWorld(context)
                 return produit
         },
