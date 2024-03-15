@@ -23,11 +23,12 @@
         <span [innerHTML]="world.money | bigvalue"> </span>
         <div> multiplicateur </div>
         <div> ID du joueur </div>
+        <button (click)="changeQtMulti()">{{qtmulti}}</button>
       </div>
       <div class="product">
         @for (product of world.products; track product.id){
-        <app-product [money]="world.money" [product]="product" (notifyProduction)="onProductionDone($event)"
-        ></app-product>
+        <app-product [money]="world.money" [product]="product" [qtmulti]="qtmulti"
+          (notifyProduction)="onProductionDone($event)"></app-product>
         }
       </div>
     </div>

@@ -1,29 +1,77 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../../world';
 import { BACKEND } from "../../../Graphrequests"
 import { BigvaluePipe } from '../bigvalue.pipe';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-
+import { MyProgressBarComponent, Orientation } from '../../progressbar.component';
 
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [BigvaluePipe, MatProgressBarModule],
+  imports: [BigvaluePipe, MyProgressBarComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 
-export class ProductComponent {
+export class ProductComponent implements OnInit {
   server = BACKEND + '/'
 
   @Input()
   product: Product = new Product()
 
+  orientation = Orientation.horizontal
+  initialValue = 0
+  run = false
+  vitesse: number = this.product.vitesse
+  auto = false
+
+
+  _money: number =0;
   @Input()
-  money: number = 0
+  set money(value: number) {
+    this._money = value;
+  }
 
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+
+  _qtmulti: string = 'x1';
+  @Input()
+  set qtmulti(value: string) {
+    this._qtmulti = value;
+    if (this._qtmulti && this.product) this.calcMaxCanBuy();
+  }
+
+  ngOnInit() {
+    setInterval(() => {
+      this.calcScore();
+    }, 100);
+  }
+
+  qtAchat : number = 0;
+  getQtAchat() {  
+    switch(this._qtmulti) {
+      case 'x1':
+        this.qtAchat = 1;
+        break;
+      case 'x10':
+        this.qtAchat = 10;
+        break;
+      case 'x100':
+        this.qtAchat = 100;
+        break;
+      case 'Max':
+        this.qtAchat = 1;
+        break;
+      default:
+        break;
+    }
+  }
+
+  BuyProduct(){
+    this.getQtAchat()
+    this.product.quantite += this.qtAchat
+  }
 
 
   progressbarvalue: number = 0
@@ -40,13 +88,12 @@ export class ProductComponent {
   startFabrication() {
     console.log("production +1")
     this.product.timeleft = this.product.vitesse
+    console.log(this.run)
+    this.run = true
+    console.log(this.run)
   }
 
-  ngOnInit() {
-    setInterval(() => {
-      this.calcScore();
-    }, 100);
-  }
+
 
   calcScore() {
     let elapsetime = Date.now() - this.product.lastupdate
@@ -70,5 +117,7 @@ export class ProductComponent {
       this.product.lastupdate = Date.now()
     }
   }
+
+  calcMaxCanBuy() { }
 
 }
