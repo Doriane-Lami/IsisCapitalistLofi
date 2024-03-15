@@ -1,5 +1,5 @@
 const fs = require("fs");
-let {products, lastupdate, managers, allunlocks} = require("./world");
+let {products, lastupdate, managers, allunlocks, score} = require("./world");
 
 function saveWorld(context) {
     fs.writeFile("userworlds/" + context.user + "-world.json",
@@ -44,7 +44,32 @@ function calcCoutProduit(produit, qt){
     produit.prix = produit.prix*Math.pow(produit.croissance,qt)
     return somme
 }
-function calcQtProductionforElapseTime(product, tempsecoule){
+
+function calcQtProductionforElapseTime(produit, tempsecoule){
+    if(!produit.managerUnlocked){
+        if(produit.timeleft !=  0) {
+            // si le produit était en production on passe
+            if (produit.timeleft <= tempsecoule) {
+                // si le produit a eu le temps d'être créé
+                produit.timeleft = 0
+                return 1
+            } else {
+                produit.timeleft -= tempsecoule
+                return 0
+            }
+        }else{
+            return 0
+        }
+
+    }else{
+        tempsecoule += produit.vitesse-produit.timeleft
+        let nb_objet_crees = Math.floor(tempsecoule/produit.vitesse)
+        produit.timeleft = produit.vitesse - tempsecoule%produit.vitesse
+        return nb_objet_crees
+    }
+}
+
+function calcQtProductionforElapseTime2(product, tempsecoule){
     if (!product) {
         throw new Error(`Le produit avec l'id ${args.id} n'existe pas`);
     }
@@ -57,9 +82,12 @@ function calcQtProductionforElapseTime(product, tempsecoule){
                 return 1
             } else {
                 product.timeleft -= tempsecoule
+                /*
                 if(!Number.isInteger(product.timeleft)){
                     throw new Error(`Timeleft n'est pas de type int ${product.timeleft} code_erreur = 1`);
                 }
+
+                 */
                 return 0
             }
         }else{
@@ -69,7 +97,7 @@ function calcQtProductionforElapseTime(product, tempsecoule){
     }else{
 
         //Coline
-        /*
+
         tempsecoule += product.vitesse-product.timeleft
         let nb_objet_crees = Math.floor(tempsecoule/product.vitesse)
         product.timeleft = product.vitesse - tempsecoule%product.vitesse
@@ -79,8 +107,8 @@ function calcQtProductionforElapseTime(product, tempsecoule){
         if(!Number.isInteger(product.timeleft)){
             throw new Error(`Timeleft n'est pas de type int ${product.timeleft} code_erreur = 2`);
         }
-         */
 
+        /*
         // ChatGPT
         let tempsecoule = Date.now() - parseInt(lastupdate);
         tempsecoule += product.vitesse - product.timeleft;
@@ -90,16 +118,73 @@ function calcQtProductionforElapseTime(product, tempsecoule){
         if (!isNaN(tempsecoule) && !isNaN(product.vitesse) && product.vitesse !== 0) {
             product.timeleft = product.vitesse - (tempsecoule % product.vitesse);
         }
+        */
         return nb_objet_crees
     }
 }
+
+function updateGainVitesse(vitesse, gain, unlock){
+    if(unlock.unlocked === "true"){
+        if(unlock.typeratio === "vitesse"){
+            vitesse = vitesse / unlock.ratio
+        }
+        if(unlock.typeratio === "gain"){
+            gain = gain * unlock.ratio
+        }
+    }
+    return gain,vitesse
+}
+
+function implementUnlocks(produit, vitesse, gain, context){
+    let nb_palliers = produit.palliers.length
+    for(let j = 0; j<nb_palliers ; j++){
+        gain, vitesse = updateGainVitesse(vitesse, gain, produit.palliers[j])
+    }
+    /*
+    for(let j = 0; j<nb_palliers ; j++){
+        if(produit.palliers[j].unlocked === "true"){
+            if(produit.palliers[j].typeratio === "vitesse"){
+                vitesse = vitesse / produit.palliers[j].ratio
+            }
+            if(produit.palliers[j].typeratio === "gain"){
+                gain = gain * produit.palliers[j].ratio
+            }
+        }
+    }
+     */
+    let nb_all_unlocks = context.world.allunlocks.length
+    for(let j = 0; j<nb_all_unlocks ; j++){
+        gain, vitesse = updateGainVitesse(vitesse, gain, context.world.allunlocks[j])
+        /*
+        if(context.world.allunlocks.unlocked === "true"){
+            if(context.world.allunlocks.typeratio === "vitesse"){
+                vitesse = vitesse / produit.palliers[j].ratio
+            }
+            if(produit.palliers[j].typeratio === "gain"){
+                gain = gain * produit.palliers[j].ratio
+            }
+        }
+
+         */
+    }
+    return vitesse,gain
+}
 function updateScore(parent, args, context, info){
     let produits = context.world.products
-    let tempsecoule = Date.now() - parseInt(lastupdate)
+    let tempsecoule = Date.now() - context.world.lastupdate
+    console.log("Temps ecoule : " + tempsecoule)
     for(let i = 0; i<6 ; i = i +1){
-        let nb_objet_crees = calcQtProductionforElapseTime(produits[i], tempsecoule)
-        context.world.score = context.world.score + nb_objet_crees*produits[i].revenu*produits[i].qt
-        lastupdate = toString(Date.now())
+        let produit = produits[i]
+        
+        let vitesse = produits[i].vitesse
+        let gain = produits[i].revenu
+        //vitesse, gain = implementUnlocks(produits[i], vitesse, gain, context)
+
+       let nb_objet_crees = calcQtProductionforElapseTime(produits[i], tempsecoule)
+        let argentGagne = nb_objet_crees*produit.revenu*produit.quantite
+        context.world.score = context.world.score + argentGagne
+        context.world.money = context.world.money + score
+        context.world.lastupdate = Date.now()
     }
 }
 
@@ -164,12 +249,20 @@ module.exports = {
             return produit
         },
         lancerProductionProduit(parent, args, context, info){
-            let produit = getProduit(parent, args, context, info)
-            produit.timeleft = produit.vitesse
-
             updateScore(parent, args, context, info)
-            saveWorld(context)
-            return produit
+            let produit = getProduit(parent, args, context, info)
+
+            if(produit.timeleft == null) {
+                throw new Error(`Le produit est encore en production`);
+            }
+                console.log("Produit :" + produit)
+                console.log("Timeleft" + produit.timeleft)
+                console.log("Vitesse" + produit.vitesse)
+                produit.timeleft = produit.vitesse
+
+                console.log("Score : " + context.world.score)
+                saveWorld(context)
+                return produit
         },
         engagerManager(parent, args, context, info){
             let manager = getManager(parent, args, context, info)

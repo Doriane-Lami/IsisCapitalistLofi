@@ -216,7 +216,25 @@ module.exports = {
 ],
 "upgrades": [
     {
-        "name": "Upgrade1_Cactus",
+        "name": "Upgrade1_All",
+        "logo": "icones/icone.png",
+        "seuil": 1e3,
+        "idcible": 0,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade2_All",
+        "logo": "icones/icone.png",
+        "seuil": 5e3,
+        "idcible": 0,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade1_Mammillaria_elongata",
         "logo": "icones/Item/item1.jpg",
         "seuil": 1e3,
         "idcible": 1,
@@ -224,6 +242,105 @@ module.exports = {
         "typeratio": "gain",
         "unlocked": false
     },
+    {
+        "name": "Upgrade2_Mammillaria_elongata",
+        "logo": "icones/Item/item1.jpg",
+        "seuil": 5e3,
+        "idcible": 1,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade1_Rebutia",
+        "logo": "icones/Item/item2.jpg",
+        "seuil": 1e3,
+        "idcible": 2,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade2_Rebutia",
+        "logo": "icones/Item/item2.jpg",
+        "seuil": 5e3,
+        "idcible": 2,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade1_Agave",
+        "logo": "icones/Item/item3.jpg",
+        "seuil": 1e3,
+        "idcible": 3,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade2_Agave",
+        "logo": "icones/Item/item3.jpg",
+        "seuil": 5e3,
+        "idcible": 3,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade1_Echeveria",
+        "logo": "icones/Item/item4.jpg",
+        "seuil": 1e3,
+        "idcible": 4,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade2_Echeveria",
+        "logo": "icones/Item/item4.jpg",
+        "seuil": 5e3,
+        "idcible": 4,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade1_Crassula",
+        "logo": "icones/Item/item5.jpg",
+        "seuil": 1e3,
+        "idcible": 5,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade2_Crassula",
+        "logo": "icones/Item/item5.jpg",
+        "seuil": 5e3,
+        "idcible": 5,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade1_Aloe_Aristata",
+        "logo": "icones/Item/item6.jpg",
+        "seuil": 1e3,
+        "idcible": 6,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    },
+    {
+        "name": "Upgrade2_Aloe_Aristata",
+        "logo": "icones/Item/item6.jpg",
+        "seuil": 5e3,
+        "idcible": 6,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    }
 ],
     "angelupgrades": [
     {
