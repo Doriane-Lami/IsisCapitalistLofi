@@ -192,17 +192,15 @@ function updateScore(parent, args, context, info){
 }
 
 function checkPallier(product){
-    // Pas vérifié
-    let nb = product.palliers.length
+    let nb = product.paliers.length
     for(let i = 0; i<nb ; i = i +1){
-        if(product.quantite >= product.palliers[i].seuil && product.palliers[i].unlocked == false){
-            product.palliers[i].unlocked = true
+        if(product.quantite >= product.paliers[i].seuil && product.paliers[i].unlocked == false){
+            product.paliers[i].unlocked = true
         }
     }
 }
 
 function checkAllUnlocks(parent, args, context, info) {
-    // WOW ça marche
     let nb_allunlocks = context.world.allunlocks.length;
     var tableau = [0, 0, 0, 0, 0, 0];
     for (let i = 0; i < nb_allunlocks; i++) {
@@ -226,6 +224,7 @@ module.exports = {
         getWorld(parent, args, context, info) {
             updateScore(parent, args, context, info)
             saveWorld(context)
+            console.log(products[1].paliers[1])
             return context.world
         }
     },
@@ -251,9 +250,9 @@ module.exports = {
 
             console.log("13, money = " + context.world.money)
 
-            //checkPallier(produit)
-            //checkAllUnlocks(parent, args, context, info)
-            // TODO : vérifier que les fonctions sont ok
+            checkPallier(produit)
+            checkAllUnlocks(parent, args, context, info)
+            // TODO : Faire en sorte que les unlocks débloque un bonus
 
             saveWorld(context)
             return produit
