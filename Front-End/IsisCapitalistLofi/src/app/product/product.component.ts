@@ -71,6 +71,7 @@ export class ProductComponent implements OnInit {
   BuyProduct(){
     this.getQtAchat()
     this.product.quantite += this.qtAchat
+    this.notifyProduction.emit(this.product);
   }
 
 
