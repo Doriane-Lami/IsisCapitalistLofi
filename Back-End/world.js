@@ -1,6 +1,6 @@
 module.exports = {
     "name": "Lofi Capitalist",
-    "logo": "icone/logo.png",
+    "logo": "icones/wallpaper.jpg",
     "money": 4,
     "score": 4,
     "totalangels": 0,
@@ -10,7 +10,7 @@ module.exports = {
     "products": [
         {
             "id": 1,
-            "name": "Mammillaria_elongata",
+            "name": "Mammillaria elongata",
             "logo": "icones/Item/item1.jpg",
             "cout": 4,
             "croissance": 1.07,
@@ -172,7 +172,7 @@ module.exports = {
         },
         {
             "id": 6,
-            "name": "Aloe_Aristata",
+            "name": "Aloe Aristata",
             "logo": "icones/Item/item6.jpg",
             "cout": 1244160,
             "croissance": 1.11,
