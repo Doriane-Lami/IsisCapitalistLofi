@@ -1,6 +1,6 @@
 module.exports = {
     "name": "Lofi Capitalist",
-    "logo": "icones/logo.png",
+    "logo": "icone/logo.png",
     "money": 4,
     "score": 4,
     "totalangels": 0,
