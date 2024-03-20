@@ -7,10 +7,21 @@ let world = require("./world")
 const typeDefs = require("./schema.js");
 
 // Provide resolver functions for your schema fields
-const resolvers = require("./resolvers")
+const resolvers = require("./resolvers");
+const fs = require("fs").promises;
+
+async function readUserWorld(user) {
+    try {
+        const data = await fs.readFile("userworlds/"+ user + "world.json");
+        return JSON.parse(data);
+    }
+    catch(error) {
+        return world
+    }
+}
 
 const server = new ApolloServer({
-    typeDefs,resolvers,
+    typeDefs, resolvers,
     context: async ({ req }) => ({
         world: await readUserWorld(req.headers["x-user"]),
         user: req.headers["x-user"]
@@ -24,15 +35,4 @@ server.start().then( res => {
         console.log(`🚀 Server ready at
 http://localhost:4000${server.graphqlPath}`)
     );
-
-    async function readUserWorld(user) {
-        try {
-            const data = await fs.readFile("userworlds/"+ user + "world.json");
-            return JSON.parse(data);
-        }
-        catch(error) {
-            return world
-        }
-    }
-
 })

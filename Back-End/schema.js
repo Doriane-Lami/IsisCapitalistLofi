@@ -16,7 +16,7 @@ type Palier {
  unlocked: Boolean
 }
 type Product {
-id: Int!
+ id: Int!
  name: String
  logo: String
  cout: Float
