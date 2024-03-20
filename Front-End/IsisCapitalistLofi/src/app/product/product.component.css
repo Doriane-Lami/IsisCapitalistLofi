@@ -1,0 +1,49 @@
+.produit{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: auto;
+    /*background-color: beige;*/
+}
+
+.gauche{
+    display: grid;
+    grid-template-columns: 1;
+    position: relative;
+}
+
+.droite{
+    text-align:left;
+    /*background-color: rgba(255, 200, 80, 0.648);*/
+    display:inline;
+    width: 90%;
+    height: 50%;
+}
+
+#logoProduitContainer {
+    position: absolute;
+    z-index: -1;
+}
+
+#logoProduit {
+    position: absolute;
+    z-index: -1;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+#qte{
+    position: relative;
+    top: 60px;
+}
+
+#progBar{
+    height:25px;
+    border-style: solid;
+    background-color: rgba(146, 146, 146, 0.838);
+}
+
+#bloc{
+    display: grid;
+    grid-template-rows: 1f 1f 1f;
+}

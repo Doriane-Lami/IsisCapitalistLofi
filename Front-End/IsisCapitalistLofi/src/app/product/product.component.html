@@ -1,1 +1,18 @@
-<p>product works!</p>
+<div class="produit">
+    <div class="gauche" (click)="startFabrication()">
+        <div id="logoProduitContainer" >
+            <img id="logoProduit" [attr.src]="server+product.logo" />
+        </div>
+        <div id="qte">{{product.quantite}}</div>
+    </div>
+
+    <div class="droite">
+        <div id="bloc">
+            <span>{{product.name}}, coût : {{product.cout}}, revenu : {{product.revenu}}</span>
+            <app-my-progress-bar id="progBar" [run]="run" [auto]="auto" frontcolor="#008800" backcolor="#FFFFFF"
+                [orientation]="orientation" [vitesse]="vitesse" [initialValue]="initialValue">
+            </app-my-progress-bar>
+            <button (click)="BuyProduct()">{{_qtmulti}}</button>
+        </div>
+    </div>
+</div>

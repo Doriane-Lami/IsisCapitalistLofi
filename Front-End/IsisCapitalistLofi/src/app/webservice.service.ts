@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createClient, fetchExchange } from "@urql/core";
-import { GET_WORLD } from "../../Graphrequests"
+import { BACKEND, GET_WORLD } from "../../Graphrequests"
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class WebserviceService {
 
   server = 'http://localhost:4000/';
   user = '';
-  api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
+  api = BACKEND +'/graphql';
 
   constructor() { }
 
@@ -25,16 +25,11 @@ export class WebserviceService {
     });
   }
 
-// createClient() {
-//   return createClient({
-//     url: this.server + '/graphql', 
-//     exchanges: defaultExchanges
-//   });
-// }
-
-
   getWorld() {
     return this.createClient().query(GET_WORLD, {}).toPromise();
   }
+
+
+  //une requête par query ICI
 
 }

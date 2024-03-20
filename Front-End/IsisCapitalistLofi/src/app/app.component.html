@@ -1,18 +1,37 @@
-<div class="header">
-  <span><img [attr.src]="server+world.logo"/></span>
-  <span id="worldname"> {{world.name}} </span>
-  <div> argent </div>
-  <div> multiplicateur </div>
-  <div> ID du joueur </div>
-</div>
-<div class="main">
-  <div> liste des boutons de menu </div>
-  <div class="product">
-    <div> premier produit </div>
-    <div> second produit </div>
-    <div> troisième produit </div>
-    <div> quatrième produit </div>
-    <div> cinquième produit </div>
-    <div> sixième produit </div>
+<div class="tout">
+  <img id="back" [attr.src]="server+world.logo" />
+
+  <div class="main">
+
+    <div class="gauche">
+      <div id="monde">
+        <img id="logomonde" [attr.src]="server+world.logo" />
+        <span id="worldname"> {{world.name}} </span>
+      </div>
+      <div id="lesBouttons">
+        <button class="bouton">Career</button>
+        <button class="bouton">Unlocks</button>
+        <button class="bouton" mat-raised-button>Upgrades</button>
+        <button class="bouton" mat-raised-button>Managers</button>
+        <button class="bouton" mat-raised-button>Inverstors</button>
+        <button class="bouton" mat-raised-button color="primary">Primary</button>
+      </div>
+    </div>
+
+    <div class="droite">
+      <div class="header">
+        <span [innerHTML]="world.money | bigvalue"> </span>
+        <div> multiplicateur </div>
+        <div> ID du joueur </div>
+        <button (click)="changeQtMulti()">{{qtmulti}}</button>
+      </div>
+      <div class="product">
+        @for (product of world.products; track product.id){
+        <app-product [money]="world.money" [product]="product" [qtmulti]="qtmulti"
+          (notifyProduction)="onProductionDone($event)"></app-product>
+        }
+      </div>
+    </div>
+
   </div>
 </div>
