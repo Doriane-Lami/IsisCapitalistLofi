@@ -9,7 +9,7 @@
     <div class="droite">
         <div id="bloc">
             <span>{{product.name}}, coût : {{product.cout}}, revenu : {{product.revenu}}</span>
-            <app-my-progress-bar id="progBar" [run]="run" [auto]="auto" frontcolor="#008800" backcolor="#FFFFFF"
+            <app-my-progress-bar id="progBar" [run]="run" [auto]="auto" frontcolor="#008800" backcolor="#BBBBBB"
                 [orientation]="orientation" [vitesse]="vitesse" [initialValue]="initialValue">
             </app-my-progress-bar>
             <button (click)="BuyProduct()">Acheter {{_qtmulti}}</button>

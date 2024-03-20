@@ -39,6 +39,7 @@ export class ProductComponent implements OnInit {
   }
 
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
 
   _qtmulti: string = 'x1';
   @Input()
@@ -75,8 +76,11 @@ export class ProductComponent implements OnInit {
 
   BuyProduct(){
     this.getQtAchat()
-    this.product.quantite += this.qtAchat
-    this.notifyProduction.emit(this.product);
+    if(this._money >= this.qtAchat * this.product.cout){
+      this.product.quantite += this.qtAchat
+      let coutTot= this.qtAchat * this.product.cout
+      this.notifyBuy.emit(coutTot);
+    }
   }
 
 
@@ -92,23 +96,20 @@ export class ProductComponent implements OnInit {
   }
 
   startFabrication() {
-    console.log("startFabrication")
     this.product.timeleft = this.product.vitesse
     this.product.lastupdate = Date.now()
-    console.log("run : " + this.run)
     this.run = true
-    console.log("run : " + this.run)
     }
 
   calcScore() {
     let elapsetime = Date.now() - this.product.lastupdate
     if (!this.product.managerUnlocked) { //Si on a pas de manager
       if (this.product.timeleft != 0) { //Si le produit est effectivement en production
+        this.product.lastupdate = Date.now() //on met à jour la date de dernière mise à jour sinon lastupdate ne fait qu'augmenter
         if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
           this.product.timeleft = 0
           this.notifyProduction.emit(this.product);
           this.run = false
-          console.log(this.run)
           //On va informer le monde qu'il faut ajouter le revenu du produit au score du monde
         } else {
           this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant

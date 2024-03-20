@@ -19,8 +19,8 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
 })
 
 export class AppComponent {
-  
-  qtmulti : string = '';
+
+  qtmulti: string = '';
 
   world: World = new World();
   server = BACKEND + '/'
@@ -35,15 +35,19 @@ export class AppComponent {
     this.qtmulti = 'x1'; // Initialisation à 'x1' lors du lancement du composant
   }
 
-  onProductionDone(p: Product){
+  onBuy(coutTot: number) {
+    this.world.money -= coutTot
+  }
+
+  onProductionDone(p: Product) {
     this.world.score += p.revenu
     this.world.money += p.revenu
   }
 
   changeQtMulti() {
     console.log("click");
-  
-    switch(this.qtmulti) {
+
+    switch (this.qtmulti) {
       case 'x1':
         this.qtmulti = 'x10';
         break;
@@ -60,7 +64,7 @@ export class AppComponent {
         break;
     }
   }
-  
+
 
 }
 
