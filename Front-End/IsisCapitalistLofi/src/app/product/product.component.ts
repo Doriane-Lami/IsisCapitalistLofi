@@ -20,12 +20,17 @@ export class ProductComponent implements OnInit {
   @Input()
   product: Product = new Product()
 
+  @Input()
+  set prod(value: Product) {
+    this.product = value;
+    this.vitesse = this.product.vitesse
+  }
+
   orientation = Orientation.horizontal
   initialValue = 0
   run = false
-  vitesse: number = this.product.vitesse
+  vitesse: number = 0
   auto = false
-
 
   _money: number =0;
   @Input()
@@ -87,29 +92,31 @@ export class ProductComponent implements OnInit {
   }
 
   startFabrication() {
-    console.log("production +1")
+    console.log("startFabrication")
     this.product.timeleft = this.product.vitesse
-    console.log(this.run)
+    this.product.lastupdate = Date.now()
+    console.log("run : " + this.run)
     this.run = true
-    console.log(this.run)
-  }
-
-
+    console.log("run : " + this.run)
+    }
 
   calcScore() {
     let elapsetime = Date.now() - this.product.lastupdate
-
-    if (!this.product.managerUnlocked) {
-      if (this.product.timeleft != null) {
-        if (this.product.timeleft <= elapsetime) {
+    if (!this.product.managerUnlocked) { //Si on a pas de manager
+      if (this.product.timeleft != 0) { //Si le produit est effectivement en production
+        if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
           this.product.timeleft = 0
           this.notifyProduction.emit(this.product);
+          this.run = false
+          console.log(this.run)
           //On va informer le monde qu'il faut ajouter le revenu du produit au score du monde
         } else {
-          this.product.timeleft = this.product.timeleft - elapsetime
+          this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant
+          // on met à jour la barre de progression
+          this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100
         }
       }
-    } else {
+    } else { // S'il y a un manager
       let nbObjetsCrees = Math.floor(elapsetime / this.product.vitesse)
       this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
       for (let i = 0; i < nbObjetsCrees; i++) {

@@ -21,7 +21,6 @@
     width: 100%;
     grid-template-columns: 33% 33% 33%;
     height: 8%;
-    background-color: aqua;
 }
 
 .main {
@@ -40,7 +39,6 @@
     display: grid;
     align-items: center;
     text-align: center;
-    background-color: cadetblue;
     justify-items: center;
 }
 

@@ -1,7 +1,7 @@
 import { gql } from "@urql/core";
 
-export const BACKEND = "https://isiscapitalistgraphql.kk.kurasawa.fr"
-
+//export const BACKEND = "https://isiscapitalistgraphql.kk.kurasawa.fr"
+export const BACKEND = "http://localhost:4000"
 
 export const GET_WORLD = gql`
 query getWorld {
